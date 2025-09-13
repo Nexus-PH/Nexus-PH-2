@@ -87,20 +87,61 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                 </svg>
             </button>
-            <h3 class="text-3xl font-bold mb-6 text-gray-800">Your Cart</h3>
-            <div id="cart-items" class="space-y-4 max-h-96 overflow-y-auto pr-2">
-                <!-- Cart items will be dynamically added here -->
-            </div>
-            <div class="mt-6 pt-4 border-t border-gray-200">
-                <div class="flex justify-between items-center font-bold text-xl text-gray-800">
-                    <span>Total:</span>
-                    <span id="cart-total-price">$0.00</span>
+            
+            <!-- Cart View -->
+            <div id="cart-view">
+                <h3 class="text-3xl font-bold mb-6 text-gray-800">Your Cart</h3>
+                <div id="cart-items" class="space-y-4 max-h-96 overflow-y-auto pr-2">
+                    <!-- Cart items will be dynamically added here -->
                 </div>
-                <button id="checkout-button" class="mt-6 w-full bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg hover:bg-blue-700 transition-colors">
-                    Proceed to Checkout
+                <div class="mt-6 pt-4 border-t border-gray-200">
+                    <div class="flex justify-between items-center font-bold text-xl text-gray-800">
+                        <span>Total:</span>
+                        <span id="cart-total-price">$0.00</span>
+                    </div>
+                    <button id="checkout-button" class="mt-6 w-full bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg hover:bg-blue-700 transition-colors">
+                        Proceed to Checkout
+                    </button>
+                </div>
+                <p id="empty-cart-message" class="text-center text-gray-500 mt-4 hidden">Your cart is empty.</p>
+            </div>
+            
+            <!-- Checkout Options View -->
+            <div id="checkout-options" class="hidden">
+                <h3 class="text-3xl font-bold mb-6 text-gray-800">Choose Payment Method</h3>
+                <div class="space-y-4">
+                    <!-- PayPal Option -->
+                    <div class="p-4 bg-gray-100 rounded-lg flex items-center justify-between">
+                        <div class="flex items-center space-x-3">
+                            <img src="https://www.paypalobjects.com/paypal-ui/logos/svg/paypal-mark-color.svg" alt="PayPal" class="w-8 h-8">
+                            <p class="text-lg font-semibold text-gray-800">PayPal</p>
+                        </div>
+                        <button class="pay-now-button bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors" data-method="PayPal">Pay Now</button>
+                    </div>
+                    <!-- GCash Option -->
+                    <div class="p-4 bg-gray-100 rounded-lg flex items-center justify-between">
+                        <div class="flex items-center space-x-3">
+                            <img src="https://gc-web.oss-ap-southeast-1.aliyuncs.com/prod/gcash/logo.png" alt="GCash" class="w-8 h-8">
+                            <p class="text-lg font-semibold text-gray-800">GCash</p>
+                        </div>
+                        <button class="pay-now-button bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors" data-method="GCash">Pay Now</button>
+                    </div>
+                    <!-- Debit/Credit Card Option -->
+                    <div class="p-4 bg-gray-100 rounded-lg flex items-center justify-between">
+                        <div class="flex items-center space-x-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h3m-3 4h.01M17 10v6a2 2 0 01-2 2H9a2 2 0 01-2-2v-6m0 0a2 2 0 012-2h6a2 2 0 012 2v6" />
+                            </svg>
+                            <p class="text-lg font-semibold text-gray-800">Debit / Credit Card</p>
+                        </div>
+                        <button class="pay-now-button bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors" data-method="Debit/Credit Card">Pay Now</button>
+                    </div>
+                </div>
+                <button id="back-to-cart-button" class="mt-6 w-full text-blue-600 font-semibold py-3 px-6 rounded-lg border border-blue-600 hover:bg-blue-50 transition-colors">
+                    Back to Cart
                 </button>
             </div>
-            <p id="empty-cart-message" class="text-center text-gray-500 mt-4 hidden">Your cart is empty.</p>
+
         </div>
     </div>
 
@@ -202,6 +243,9 @@
         const emptyCartMessage = document.getElementById('empty-cart-message');
         const messageBox = document.getElementById('message-box');
         const checkoutButton = document.getElementById('checkout-button');
+        const cartView = document.getElementById('cart-view');
+        const checkoutOptions = document.getElementById('checkout-options');
+        const backToCartButton = document.getElementById('back-to-cart-button');
 
         // Function to render the product grid
         function renderProducts() {
@@ -333,6 +377,8 @@
         // Event listeners for modals
         cartButton.addEventListener('click', () => {
             cartModal.classList.remove('hidden');
+            cartView.classList.remove('hidden');
+            checkoutOptions.classList.add('hidden');
         });
 
         closeCartModalButton.addEventListener('click', () => {
@@ -367,14 +413,27 @@
                 showMessageBox('Your cart is empty. Please add items to proceed.');
                 return;
             }
-
-            // Simulate the checkout process
-            showMessageBox('Thank you for your order! Your simulated payment was successful.');
-            cart = []; // Clear the cart
-            updateCart(); // Update the UI
-            cartModal.classList.add('hidden'); // Close the cart modal
+            
+            cartView.classList.add('hidden');
+            checkoutOptions.classList.remove('hidden');
         });
 
+        // Event listeners for payment buttons
+        document.querySelectorAll('.pay-now-button').forEach(button => {
+            button.addEventListener('click', (e) => {
+                const method = e.currentTarget.dataset.method;
+                showMessageBox(`Payment successful via ${method}! Your order has been placed.`);
+                cart = []; // Clear the cart
+                updateCart(); // Update the UI
+                cartModal.classList.add('hidden'); // Close the cart modal
+            });
+        });
+
+        // Event listener for back to cart button
+        backToCartButton.addEventListener('click', () => {
+            checkoutOptions.classList.add('hidden');
+            cartView.classList.remove('hidden');
+        });
 
         // Initial render
         document.addEventListener('DOMContentLoaded', () => {
