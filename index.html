@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BioPure Peptides</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f9fb;
+            color: #333;
+        }
+
+        /* Custom scrollbar for better aesthetics */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #e2e8f0;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: #64748b;
+            border-radius: 10px;
+            border: 2px solid #f7f9fb;
+        }
+
+        /* Custom modal animation */
+        .modal {
+            transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+        }
+
+        .modal.hidden {
+            transform: scale(0.95);
+            opacity: 0;
+            pointer-events: none;
+        }
+    </style>
+</head>
+
+<body class="antialiased">
+
+    <!-- Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="#" class="flex items-center space-x-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zM12 14c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3z" />
+                    <path d="M16 8.5L20 4M8 19.5l-4 4M18.5 16L22 20M5.5 8L2 4" />
+                </svg>
+                <h1 class="text-2xl font-bold text-gray-800">BioPure Peptides</h1>
+            </a>
+            <div class="flex items-center space-x-4">
+                <button id="cart-button" class="relative p-2 rounded-full bg-blue-100 text-blue-600 hover:bg-blue-200 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.182 1.748.595 1.748H19.5a2.25 2.25 0 002.25-2.25V9m-3.5 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm-7.5 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
+                    </svg>
+                    <span id="cart-item-count" class="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <h2 class="text-4xl font-extrabold text-gray-900 text-center mb-4">Our Products</h2>
+        <p class="text-center text-gray-600 mb-8 max-w-2xl mx-auto">Explore our range of high-purity peptides for research purposes. All products are rigorously tested to ensure quality and authenticity.</p>
+
+        <!-- Product Grid -->
+        <section id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Product cards will be inserted here by JavaScript -->
+        </section>
+    </main>
+
+    <!-- Shopping Cart Modal -->
+    <div id="cart-modal" class="modal fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center p-4 hidden z-50">
+        <div class="bg-white rounded-lg shadow-xl w-full max-w-2xl p-6 relative">
+            <button id="close-cart-modal" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+            <h3 class="text-3xl font-bold mb-6 text-gray-800">Your Cart</h3>
+            <div id="cart-items" class="space-y-4 max-h-96 overflow-y-auto pr-2">
+                <!-- Cart items will be dynamically added here -->
+            </div>
+            <div class="mt-6 pt-4 border-t border-gray-200">
+                <div class="flex justify-between items-center font-bold text-xl text-gray-800">
+                    <span>Total:</span>
+                    <span id="cart-total-price">$0.00</span>
+                </div>
+                <button id="checkout-button" class="mt-6 w-full bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg hover:bg-blue-700 transition-colors">
+                    Proceed to Checkout
+                </button>
+            </div>
+            <p id="empty-cart-message" class="text-center text-gray-500 mt-4 hidden">Your cart is empty.</p>
+        </div>
+    </div>
+
+
+    <!-- Product Detail Modal -->
+    <div id="product-modal" class="modal fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center p-4 hidden z-50">
+        <div class="bg-white rounded-lg shadow-xl w-full max-w-4xl p-8 relative">
+            <button id="close-product-modal" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+            <div id="product-detail-content" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Product details will be injected here by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Message Box for notifications -->
+    <div id="message-box" class="fixed bottom-6 right-6 z-[100] p-4 bg-green-500 text-white rounded-lg shadow-lg transform translate-y-full transition-transform duration-300 ease-out hidden">
+        Product added to cart!
+    </div>
+
+
+    <script>
+        // Sample product data
+        const products = [{
+                id: 1,
+                name: 'BPC-157',
+                price: 59.99,
+                description: 'A stable gastric pentadecapeptide known for its regenerative and protective effects.',
+                longDescription: 'BPC-157 is a synthetically produced peptide that has shown potential in accelerated wound healing, reducing inflammation, and promoting the repair of various tissues, including muscle, tendon, and ligament.',
+                image: 'https://placehold.co/400x400/F0F4F8/64748b?text=BPC-157'
+            },
+            {
+                id: 2,
+                name: 'TB-500',
+                price: 49.99,
+                description: 'A synthetic version of the naturally occurring peptide Thymosin Beta-4.',
+                longDescription: 'TB-500 is recognized for its potent regenerative properties, including promoting the healing of damaged tissues, reducing inflammation, and improving joint flexibility. It is widely used in athletic recovery.',
+                image: 'https://placehold.co/400x400/F0F4F8/64748b?text=TB-500'
+            },
+            {
+                id: 3,
+                name: 'GHK-Cu',
+                price: 34.99,
+                description: 'A copper peptide naturally present in human plasma, known for its anti-aging properties.',
+                longDescription: 'GHK-Cu is a tripeptide that has been extensively studied for its ability to stimulate collagen synthesis, improve skin elasticity, and promote wound healing. It is a popular ingredient in cosmetic and anti-aging products.',
+                image: 'https://placehold.co/400x400/F0F4F8/64748b?text=GHK-Cu'
+            },
+            {
+                id: 4,
+                name: 'CJC-1295',
+                price: 69.99,
+                description: 'A growth hormone-releasing hormone analog used to promote muscle growth and recovery.',
+                longDescription: 'CJC-1295 is a long-acting peptide that stimulates the release of growth hormone from the pituitary gland. It is often used by athletes to enhance muscle repair, increase lean muscle mass, and improve overall body composition.',
+                image: 'https://placehold.co/400x400/F0F4F8/64748b?text=CJC-1295'
+            },
+            {
+                id: 5,
+                name: 'Ipamorelin',
+                price: 55.99,
+                description: 'A selective growth hormone secretagogue that increases plasma growth hormone levels.',
+                longDescription: 'Ipamorelin is a peptide known for its ability to increase growth hormone release without affecting cortisol or prolactin levels. This makes it a popular choice for those seeking to improve sleep quality, reduce body fat, and increase muscle mass.',
+                image: 'https://placehold.co/400x400/F0F4F8/64748b?text=Ipamorelin'
+            },
+            {
+                id: 6,
+                name: 'PT-141',
+                price: 74.99,
+                description: 'A melanocortin-based peptide that can affect sexual arousal in both men and women.',
+                longDescription: 'PT-141, also known as Bremelanotide, is a peptide used to treat sexual dysfunction by acting on the central nervous system. It is a popular option for those seeking to improve their libido and sexual performance.',
+                image: 'https://placehold.co/400x400/F0F4F8/64748b?text=PT-141'
+            },
+            {
+                id: 7,
+                name: 'Tirzepatide',
+                price: 129.99,
+                description: 'A dual GIP and GLP-1 receptor agonist known for its effects on metabolic health and weight management.',
+                longDescription: 'Tirzepatide is a novel peptide that acts on both the GIP (glucose-dependent insulinotropic polypeptide) and GLP-1 (glucagon-like peptide-1) receptors. This dual action makes it highly effective at improving glycemic control and promoting significant weight loss, making it a key research compound for studies on metabolic health and obesity.',
+                image: 'https://placehold.co/400x400/F0F4F8/64748b?text=Tirzepatide'
+            }
+        ];
+
+        // Global state for the cart
+        let cart = [];
+
+        // DOM elements
+        const productGrid = document.getElementById('product-grid');
+        const cartButton = document.getElementById('cart-button');
+        const cartModal = document.getElementById('cart-modal');
+        const closeCartModalButton = document.getElementById('close-cart-modal');
+        const productModal = document.getElementById('product-modal');
+        const closeProductModalButton = document.getElementById('close-product-modal');
+        const productDetailContent = document.getElementById('product-detail-content');
+        const cartItemsContainer = document.getElementById('cart-items');
+        const cartTotalDisplay = document.getElementById('cart-total-price');
+        const cartItemCountSpan = document.getElementById('cart-item-count');
+        const emptyCartMessage = document.getElementById('empty-cart-message');
+        const messageBox = document.getElementById('message-box');
+
+        // Function to render the product grid
+        function renderProducts() {
+            productGrid.innerHTML = '';
+            products.forEach(product => {
+                const productCard = document.createElement('div');
+                productCard.className = 'product-card bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow cursor-pointer flex flex-col items-center text-center';
+                productCard.innerHTML = `
+                    <img src="${product.image}" alt="${product.name}" class="rounded-lg mb-4 w-48 h-48 object-cover">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">${product.name}</h3>
+                    <p class="text-sm text-gray-500 flex-grow mb-4">${product.description}</p>
+                    <div class="mt-auto">
+                        <span class="text-2xl font-bold text-blue-600">$${product.price.toFixed(2)}</span>
+                    </div>
+                `;
+                productCard.addEventListener('click', () => showProductDetails(product.id));
+                productGrid.appendChild(productCard);
+            });
+        }
+
+        // Function to show product details in a modal
+        function showProductDetails(id) {
+            const product = products.find(p => p.id === id);
+            if (!product) return;
+
+            productDetailContent.innerHTML = `
+                <div class="flex items-center justify-center">
+                    <img src="${product.image}" alt="${product.name}" class="rounded-lg max-w-full h-auto">
+                </div>
+                <div class="flex flex-col">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-2">${product.name}</h2>
+                    <p class="text-lg text-gray-600 mb-4">$${product.price.toFixed(2)}</p>
+                    <p class="text-gray-700 leading-relaxed mb-6">${product.longDescription}</p>
+                    <button id="add-to-cart-btn" data-product-id="${product.id}" class="w-full bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg hover:bg-blue-700 transition-colors">
+                        Add to Cart
+                    </button>
+                </div>
+            `;
+            productModal.classList.remove('hidden');
+
+            document.getElementById('add-to-cart-btn').addEventListener('click', () => {
+                addItemToCart(product.id);
+                productModal.classList.add('hidden');
+            });
+        }
+
+        // Function to add an item to the cart
+        function addItemToCart(id) {
+            const product = products.find(p => p.id === id);
+            if (!product) return;
+
+            const existingItem = cart.find(item => item.id === id);
+            if (existingItem) {
+                existingItem.quantity++;
+            } else {
+                cart.push({
+                    ...product,
+                    quantity: 1
+                });
+            }
+            updateCart();
+            showMessageBox('Product added to cart!');
+        }
+
+        // Function to update the cart UI
+        function updateCart() {
+            cartItemsContainer.innerHTML = '';
+            let total = 0;
+
+            if (cart.length === 0) {
+                emptyCartMessage.classList.remove('hidden');
+            } else {
+                emptyCartMessage.classList.add('hidden');
+            }
+
+            cart.forEach(item => {
+                total += item.price * item.quantity;
+                const cartItem = document.createElement('div');
+                cartItem.className = 'flex items-center justify-between p-4 bg-gray-100 rounded-lg';
+                cartItem.innerHTML = `
+                    <div class="flex items-center space-x-4">
+                        <img src="${item.image}" alt="${item.name}" class="w-16 h-16 rounded-lg object-cover">
+                        <div>
+                            <p class="font-semibold text-gray-800">${item.name}</p>
+                            <p class="text-sm text-gray-500">$${item.price.toFixed(2)} x ${item.quantity}</p>
+                        </div>
+                    </div>
+                    <span class="font-semibold text-gray-800">$${(item.price * item.quantity).toFixed(2)}</span>
+                `;
+                cartItemsContainer.appendChild(cartItem);
+            });
+
+            cartTotalDisplay.textContent = `$${total.toFixed(2)}`;
+            cartItemCountSpan.textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
+        }
+
+        // Function to display a message box
+        function showMessageBox(message) {
+            messageBox.textContent = message;
+            messageBox.classList.remove('hidden');
+            setTimeout(() => {
+                messageBox.style.transform = 'translateY(0)';
+            }, 10);
+            setTimeout(() => {
+                messageBox.style.transform = 'translateY(150%)';
+                setTimeout(() => {
+                    messageBox.classList.add('hidden');
+                }, 300);
+            }, 3000);
+        }
+
+        // Event listeners for modals
+        cartButton.addEventListener('click', () => {
+            cartModal.classList.remove('hidden');
+        });
+
+        closeCartModalButton.addEventListener('click', () => {
+            cartModal.classList.add('hidden');
+        });
+
+        closeProductModalButton.addEventListener('click', () => {
+            productModal.classList.add('hidden');
+        });
+
+        // Close modals when clicking outside
+        window.addEventListener('click', (e) => {
+            if (e.target === cartModal) {
+                cartModal.classList.add('hidden');
+            }
+            if (e.target === productModal) {
+                productModal.classList.add('hidden');
+            }
+        });
+
+        // Handle escape key to close modals
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                cartModal.classList.add('hidden');
+                productModal.classList.add('hidden');
+            }
+        });
+
+        // Initial render
+        document.addEventListener('DOMContentLoaded', () => {
+            renderProducts();
+            updateCart();
+        });
+    </script>
+</body>
+
+</html>
