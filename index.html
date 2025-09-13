@@ -373,12 +373,22 @@
                 }, 300);
             }, 3000);
         }
+        
+        // Function to update the view inside the modal
+        function updateModalView(view) {
+            if (view === 'cart') {
+                cartView.classList.remove('hidden');
+                checkoutOptions.classList.add('hidden');
+            } else if (view === 'checkout') {
+                cartView.classList.add('hidden');
+                checkoutOptions.classList.remove('hidden');
+            }
+        }
 
         // Event listeners for modals
         cartButton.addEventListener('click', () => {
             cartModal.classList.remove('hidden');
-            cartView.classList.remove('hidden');
-            checkoutOptions.classList.add('hidden');
+            updateModalView('cart'); // Ensure we start at the cart view
         });
 
         closeCartModalButton.addEventListener('click', () => {
@@ -414,8 +424,7 @@
                 return;
             }
             
-            cartView.classList.add('hidden');
-            checkoutOptions.classList.remove('hidden');
+            updateModalView('checkout');
         });
 
         // Event listeners for payment buttons
@@ -431,8 +440,7 @@
 
         // Event listener for back to cart button
         backToCartButton.addEventListener('click', () => {
-            checkoutOptions.classList.add('hidden');
-            cartView.classList.remove('hidden');
+            updateModalView('cart');
         });
 
         // Initial render
