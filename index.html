@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nexus-PH</title>
+    <title>Veptra</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -42,6 +42,51 @@
             opacity: 0;
             pointer-events: none;
         }
+
+        /* FAQ accordion styling */
+        .faq-item input[type="checkbox"] {
+            display: none;
+        }
+
+        .faq-item label {
+            cursor: pointer;
+            display: block;
+            padding: 1.5rem;
+            border-bottom: 1px solid #e2e8f0;
+            font-weight: 600;
+            transition: background-color 0.2s;
+        }
+
+        .faq-item label:hover {
+            background-color: #f1f5f9;
+        }
+
+        .faq-item .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-in-out, padding 0.3s ease-in-out;
+            padding: 0 1.5rem;
+        }
+
+        .faq-item input[type="checkbox"]:checked+.faq-answer {
+            max-height: 500px;
+            padding: 1.5rem;
+        }
+
+        .faq-item .plus-icon,
+        .faq-item .minus-icon {
+            transition: transform 0.3s;
+        }
+
+        .faq-item input[type="checkbox"]:checked~label .plus-icon {
+            transform: rotate(45deg);
+            opacity: 0;
+        }
+
+        .faq-item input[type="checkbox"]:checked~label .minus-icon {
+            transform: rotate(0deg);
+            opacity: 1;
+        }
     </style>
 </head>
 
@@ -55,7 +100,7 @@
                     <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zM12 14c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3z" />
                     <path d="M16 8.5L20 4M8 19.5l-4 4M18.5 16L22 20M5.5 8L2 4" />
                 </svg>
-                <h1 class="text-2xl font-bold text-gray-800">Nexus-PH</h1>
+                <h1 class="text-2xl font-bold text-gray-800">Veptra</h1>
             </a>
             <div class="flex items-center space-x-4">
                 <button id="cart-button" class="relative p-2 rounded-full bg-blue-100 text-blue-600 hover:bg-blue-200 transition-colors">
@@ -73,11 +118,97 @@
         <h2 class="text-4xl font-extrabold text-gray-900 text-center mb-4">Our Products</h2>
         <p class="text-center text-gray-600 mb-8 max-w-2xl mx-auto">Explore our range of high-purity peptides for research purposes. All products are rigorously tested to ensure quality and authenticity.</p>
 
+        <!-- Short Description of Peptides -->
+        <section id="peptide-description" class="bg-blue-50 border-l-4 border-blue-500 p-6 rounded-lg mb-8 shadow-sm">
+            <h3 class="text-2xl font-semibold text-gray-800 mb-4">What Are Peptides?</h3>
+            <p class="text-gray-700 leading-relaxed">
+                Peptides are short chains of amino acids, the building blocks of proteins. They play a vital role in many biological processes. Research peptides are compounds used exclusively in laboratory and scientific studies to explore their potential effects and mechanisms. Our products are intended solely for these research applications.
+            </p>
+        </section>
+
         <!-- Product Grid -->
         <section id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             <!-- Product cards will be inserted here by JavaScript -->
         </section>
+
+        <!-- FAQ Section -->
+        <section id="faq-section" class="my-16">
+            <h2 class="text-4xl font-extrabold text-gray-900 text-center mb-8">Frequently Asked Questions</h2>
+            <div class="max-w-3xl mx-auto bg-white rounded-xl shadow-lg divide-y divide-gray-200">
+                <div class="faq-item">
+                    <input type="checkbox" id="faq1">
+                    <label for="faq1" class="flex justify-between items-center">
+                        Is it safe to consume your products?
+                        <span class="text-gray-500">
+                            <span class="plus-icon">+</span>
+                            <span class="minus-icon hidden">-</span>
+                        </span>
+                    </label>
+                    <div class="faq-answer">
+                        <p class="text-gray-600">No. All products sold on this website are strictly for in-vitro research and laboratory use only. They are not intended for human consumption, cosmetic use, or any other purposes. Please refer to our disclaimer for more information.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <input type="checkbox" id="faq2">
+                    <label for="faq2" class="flex justify-between items-center">
+                        What is the purity of your peptides?
+                        <span class="text-gray-500">
+                            <span class="plus-icon">+</span>
+                            <span class="minus-icon hidden">-</span>
+                        </span>
+                    </label>
+                    <div class="faq-answer">
+                        <p class="text-gray-600">We guarantee a minimum purity of 99% for all our peptides. Each batch is rigorously tested through High-Performance Liquid Chromatography (HPLC) and Mass Spectrometry to ensure quality, potency, and consistency.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <input type="checkbox" id="faq3">
+                    <label for="faq3" class="flex justify-between items-center">
+                        How should I store the peptides?
+                        <span class="text-gray-500">
+                            <span class="plus-icon">+</span>
+                            <span class="minus-icon hidden">-</span>
+                        </span>
+                    </label>
+                    <div class="faq-answer">
+                        <p class="text-gray-600">For maximum longevity, lyophilized (freeze-dried) peptides should be stored in a cool, dry place, away from direct sunlight. Once reconstituted with a solvent, they should be stored in a refrigerator ($2-8^\circ C$) for a short period, or frozen for long-term storage.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <input type="checkbox" id="faq4">
+                    <label for="faq4" class="flex justify-between items-center">
+                        Do you ship internationally?
+                        <span class="text-gray-500">
+                            <span class="plus-icon">+</span>
+                            <span class="minus-icon hidden">-</span>
+                        </span>
+                    </label>
+                    <div class="faq-answer">
+                        <p class="text-gray-600">Yes, we ship to most countries. However, it is the customer's responsibility to know the import laws of their country. We are not responsible for any issues that may arise with customs or import regulations.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
     </main>
+
+    <!-- Footer with Disclaimer -->
+    <footer class="bg-gray-800 text-white py-12 px-4 text-center">
+        <div class="container mx-auto max-w-4xl">
+            <h3 class="text-2xl font-bold mb-4 text-red-400">Disclaimer</h3>
+            <p class="text-gray-300 leading-relaxed mb-4">
+                The statements on this website have not been evaluated by the Philippine Food and Drug Administration (FDA). Our products are not intended to diagnose, treat, cure, or prevent any disease.
+            </p>
+            <p class="text-gray-300 leading-relaxed mb-4">
+                **All products are for laboratory research use only and are not for human consumption.** Nexus-ph operates exclusively as a chemical supplier and is not a compounding pharmacy. Our products are intended solely for in-vitro and pre-clinical research purposes.
+            </p>
+            <p class="text-gray-300 leading-relaxed mb-6">
+                By purchasing these products, you acknowledge that you have the necessary equipment, facilities, and expertise to handle them safely. You accept all risks associated with their handling, use, and distribution. You agree to indemnify and hold Nexus-ph harmless from any claims made by third parties resulting from your use of these products outside of their intended research applications.
+            </p>
+            <p class="text-gray-400 text-sm">&copy; 2024 Nexus-ph. All rights reserved.</p>
+        </div>
+    </footer>
+
 
     <!-- Shopping Cart Modal -->
     <div id="cart-modal" class="modal fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center p-4 hidden z-50">
@@ -87,7 +218,7 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                 </svg>
             </button>
-            
+
             <!-- Cart View -->
             <div id="cart-view">
                 <h3 class="text-3xl font-bold mb-6 text-gray-800">Your Cart</h3>
@@ -105,38 +236,33 @@
                 </div>
                 <p id="empty-cart-message" class="text-center text-gray-500 mt-4 hidden">Your cart is empty.</p>
             </div>
-            
-            <!-- Checkout Options View -->
+
+            <!-- Checkout Options View (now a single form) -->
             <div id="checkout-options" class="hidden">
-                <h3 class="text-3xl font-bold mb-6 text-gray-800">Choose Payment Method</h3>
-                <div class="space-y-4">
-                    <!-- PayPal Option -->
-                    <div class="p-4 bg-gray-100 rounded-lg flex items-center justify-between">
-                        <div class="flex items-center space-x-3">
-                            <img src="https://www.paypalobjects.com/paypal-ui/logos/svg/paypal-mark-color.svg" alt="PayPal" class="w-8 h-8">
-                            <p class="text-lg font-semibold text-gray-800">PayPal</p>
-                        </div>
-                        <button class="pay-now-button bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors" data-method="PayPal">Pay Now</button>
+                <h3 class="text-3xl font-bold mb-6 text-gray-800">Payment Information</h3>
+                <form id="payment-form" class="space-y-4">
+                    <div>
+                        <label for="card-number" class="block text-sm font-medium text-gray-700">Card Number</label>
+                        <input type="text" id="card-number" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2" placeholder="xxxx xxxx xxxx xxxx" required>
                     </div>
-                    <!-- GCash Option -->
-                    <div class="p-4 bg-gray-100 rounded-lg flex items-center justify-between">
-                        <div class="flex items-center space-x-3">
-                            <img src="https://gc-web.oss-ap-southeast-1.aliyuncs.com/prod/gcash/logo.png" alt="GCash" class="w-8 h-8">
-                            <p class="text-lg font-semibold text-gray-800">GCash</p>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label for="exp-date" class="block text-sm font-medium text-gray-700">Expiration Date</label>
+                            <input type="text" id="exp-date" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2" placeholder="MM/YY" required>
                         </div>
-                        <button class="pay-now-button bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors" data-method="GCash">Pay Now</button>
-                    </div>
-                    <!-- Debit/Credit Card Option -->
-                    <div class="p-4 bg-gray-100 rounded-lg flex items-center justify-between">
-                        <div class="flex items-center space-x-3">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h3m-3 4h.01M17 10v6a2 2 0 01-2 2H9a2 2 0 01-2-2v-6m0 0a2 2 0 012-2h6a2 2 0 012 2v6" />
-                            </svg>
-                            <p class="text-lg font-semibold text-gray-800">Debit / Credit Card</p>
+                        <div>
+                            <label for="cvv" class="block text-sm font-medium text-gray-700">CVV</label>
+                            <input type="text" id="cvv" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2" placeholder="xxx" required>
                         </div>
-                        <button class="pay-now-button bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors" data-method="Debit/Credit Card">Pay Now</button>
                     </div>
-                </div>
+                    <div>
+                        <label for="card-name" class="block text-sm font-medium text-gray-700">Name on Card</label>
+                        <input type="text" id="card-name" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2" required>
+                    </div>
+                    <button type="submit" class="mt-6 w-full bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg hover:bg-blue-700 transition-colors">
+                        Complete Payment
+                    </button>
+                </form>
                 <button id="back-to-cart-button" class="mt-6 w-full text-blue-600 font-semibold py-3 px-6 rounded-lg border border-blue-600 hover:bg-blue-50 transition-colors">
                     Back to Cart
                 </button>
@@ -170,19 +296,19 @@
         // Sample product data
         const products = [{
                 id: 1,
-                name: 'BPC-157',
-                price: 59.99,
-                description: 'A stable gastric pentadecapeptide known for its regenerative and protective effects.',
-                longDescription: 'BPC-157 is a synthetically produced peptide that has shown potential in accelerated wound healing, reducing inflammation, and promoting the repair of various tissues, including muscle, tendon, and ligament.',
-                image: 'https://placehold.co/400x400/F0F4F8/64748b?text=BPC-157'
+                name: 'BAC - Water 3ml',
+                price: 4.99,
+                description: 'Bacteriostatic water for reconstituting research peptides.',
+                longDescription: 'Bacteriostatic water (BAC Water) contains 0.9% benzyl alcohol as a preservative, which inhibits the growth of bacteria. It is the standard sterile solvent for reconstituting lyophilized (freeze-dried) peptides and other research chemicals, ensuring product stability and purity for multiple uses.',
+                image: 'https://placehold.co/400x400/F0F4F8/64748b?text=BAC-Water+3ml'
             },
             {
                 id: 2,
-                name: 'TB-500',
-                price: 49.99,
-                description: 'A synthetic version of the naturally occurring peptide Thymosin Beta-4.',
-                longDescription: 'TB-500 is recognized for its potent regenerative properties, including promoting the healing of damaged tissues, reducing inflammation, and improving joint flexibility. It is widely used in athletic recovery.',
-                image: 'https://placehold.co/400x400/F0F4F8/64748b?text=TB-500'
+                name: 'BAC - Water 10ml',
+                price: 8.99,
+                description: 'Larger volume of bacteriostatic water for multiple research vials.',
+                longDescription: 'A larger 10ml vial of bacteriostatic water, ideal for researchers who require a higher volume of sterile solvent for their studies. Provides the same preservative quality as the 3ml vial, ensuring the longevity and integrity of reconstituted peptides.',
+                image: 'https://placehold.co/400x400/F0F4F8/64748b?text=BAC-Water+10ml'
             },
             {
                 id: 3,
@@ -194,35 +320,43 @@
             },
             {
                 id: 4,
-                name: 'CJC-1295',
-                price: 69.99,
-                description: 'A growth hormone-releasing hormone analog used to promote muscle growth and recovery.',
-                longDescription: 'CJC-1295 is a long-acting peptide that stimulates the release of growth hormone from the pituitary gland. It is often used by athletes to enhance muscle repair, increase lean muscle mass, and improve overall body composition.',
-                image: 'https://placehold.co/400x400/F0F4F8/64748b?text=CJC-1295'
+                name: 'Selank',
+                price: 65.99,
+                description: 'A synthetic analog of the human body\'s tuftsin peptide, known for its anxiolytic effects.',
+                longDescription: 'Selank is a heptapeptide with potential nootropic, anxiolytic, and antiviral properties. It is a synthetic derivative of the naturally occurring immunomodulatory peptide tuftsin. Research suggests it may reduce anxiety and improve cognitive functions without sedative side effects.',
+                image: 'https://placehold.co/400x400/F0F4F8/64748b?text=Selank'
             },
             {
                 id: 5,
-                name: 'Ipamorelin',
-                price: 55.99,
-                description: 'A selective growth hormone secretagogue that increases plasma growth hormone levels.',
-                longDescription: 'Ipamorelin is a peptide known for its ability to increase growth hormone release without affecting cortisol or prolactin levels. This makes it a popular choice for those seeking to improve sleep quality, reduce body fat, and increase muscle mass.',
-                image: 'https://placehold.co/400x400/F0F4F8/64748b?text=Ipamorelin'
+                name: 'Semax',
+                price: 69.99,
+                description: 'A synthetic heptapeptide with neuroprotective and nootropic properties.',
+                longDescription: 'Semax is a synthetic peptide known for its potent nootropic and neuroprotective effects. It is a derivative of a portion of the ACTH molecule. Studies indicate it may enhance cognitive performance, memory, and attention, while also offering protection against various types of oxidative stress.',
+                image: 'https://placehold.co/400x400/F0F4F8/64748b?text=Semax'
             },
             {
                 id: 6,
-                name: 'PT-141',
-                price: 74.99,
-                description: 'A melanocortin-based peptide that can affect sexual arousal in both men and women.',
-                longDescription: 'PT-141, also known as Bremelanotide, is a peptide used to treat sexual dysfunction by acting on the central nervous system. It is a popular option for those seeking to improve their libido and sexual performance.',
-                image: 'https://placehold.co/400x400/F0F4F8/64748b?text=PT-141'
+                name: 'Tirzepatide 5mg',
+                price: 99.99,
+                description: 'A dual GIP and GLP-1 receptor agonist for metabolic research.',
+                longDescription: 'This 5mg vial of Tirzepatide is a research-grade dual GIP and GLP-1 receptor agonist. It is used in studies focused on improving glycemic control and investigating its role in metabolic health and weight management. The low dose is suitable for initial research protocols.',
+                image: 'https://placehold.co/400x400/F0F4F8/64748b?text=Tirzepatide+5mg'
             },
             {
                 id: 7,
-                name: 'Tirzepatide',
-                price: 129.99,
-                description: 'A dual GIP and GLP-1 receptor agonist known for its effects on metabolic health and weight management.',
-                longDescription: 'Tirzepatide is a novel peptide that acts on both the GIP (glucose-dependent insulinotropic polypeptide) and GLP-1 (glucagon-like peptide-1) receptors. This dual action makes it highly effective at improving glycemic control and promoting significant weight loss, making it a key research compound for studies on metabolic health and obesity.',
-                image: 'https://placehold.co/400x400/F0F4F8/64748b?text=Tirzepatide'
+                name: 'Tirzepatide 15mg',
+                price: 249.99,
+                description: 'A higher concentration of Tirzepatide for advanced metabolic research.',
+                longDescription: 'This 15mg vial of Tirzepatide provides a concentrated form of the dual GIP and GLP-1 receptor agonist. It is ideal for advanced research and studies requiring higher dosages, allowing for the exploration of more pronounced effects on glucose regulation and body composition.',
+                image: 'https://placehold.co/400x400/F0F4F8/64748b?text=Tirzepatide+15mg'
+            },
+            {
+                id: 8,
+                name: 'Tirzepatide 30mg',
+                price: 449.99,
+                description: 'The highest concentration of Tirzepatide for extensive metabolic and obesity studies.',
+                longDescription: 'This 30mg vial of Tirzepatide is the highest concentration available, intended for comprehensive and long-term research protocols. It facilitates extensive studies into the mechanisms behind its potent effects on metabolic syndromes, obesity, and related physiological pathways.',
+                image: 'https://placehold.co/400x400/F0F4F8/64748b?text=Tirzepatide+30mg'
             }
         ];
 
@@ -246,6 +380,9 @@
         const cartView = document.getElementById('cart-view');
         const checkoutOptions = document.getElementById('checkout-options');
         const backToCartButton = document.getElementById('back-to-cart-button');
+        const paymentForm = document.getElementById('payment-form');
+        const faqItems = document.querySelectorAll('.faq-item');
+
 
         // Function to render the product grid
         function renderProducts() {
@@ -347,7 +484,7 @@
                     </button>
                 `;
                 cartItemsContainer.appendChild(cartItem);
-                
+
                 // Add event listener for the remove button
                 cartItem.querySelector('.remove-item').addEventListener('click', (e) => {
                     const productId = parseInt(e.currentTarget.dataset.productId);
@@ -373,7 +510,7 @@
                 }, 300);
             }, 3000);
         }
-        
+
         // Function to update the view inside the modal
         function updateModalView(view) {
             if (view === 'cart') {
@@ -423,24 +560,42 @@
                 showMessageBox('Your cart is empty. Please add items to proceed.');
                 return;
             }
-            
-            updateModalView('checkout');
-        });
 
-        // Event listeners for payment buttons
-        document.querySelectorAll('.pay-now-button').forEach(button => {
-            button.addEventListener('click', (e) => {
-                const method = e.currentTarget.dataset.method;
-                showMessageBox(`Payment successful via ${method}! Your order has been placed.`);
-                cart = []; // Clear the cart
-                updateCart(); // Update the UI
-                cartModal.classList.add('hidden'); // Close the cart modal
-            });
+            updateModalView('checkout');
         });
 
         // Event listener for back to cart button
         backToCartButton.addEventListener('click', () => {
             updateModalView('cart');
+        });
+
+        // Event listener for the new payment form submission
+        paymentForm.addEventListener('submit', (e) => {
+            e.preventDefault(); // Prevent the form from submitting
+
+            // This is where you would normally send payment data to a server.
+            // For this simulation, we just clear the cart and show a message.
+            showMessageBox('Payment successful! Your order has been placed.');
+            cart = []; // Clear the cart
+            updateCart(); // Update the UI
+            cartModal.classList.add('hidden'); // Close the cart modal
+        });
+
+        // Script to handle the FAQ accordion functionality
+        faqItems.forEach(item => {
+            const checkbox = item.querySelector('input[type="checkbox"]');
+            const plusIcon = item.querySelector('.plus-icon');
+            const minusIcon = item.querySelector('.minus-icon');
+
+            checkbox.addEventListener('change', () => {
+                if (checkbox.checked) {
+                    plusIcon.style.display = 'none';
+                    minusIcon.style.display = 'inline-block';
+                } else {
+                    plusIcon.style.display = 'inline-block';
+                    minusIcon.style.display = 'none';
+                }
+            });
         });
 
         // Initial render
@@ -452,5 +607,3 @@
 </body>
 
 </html>
-
-
