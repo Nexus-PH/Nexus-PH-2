@@ -32,17 +32,6 @@
             border: 2px solid #f7f9fb;
         }
 
-        /* Custom modal animation */
-        .modal {
-            transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
-        }
-
-        .modal.hidden {
-            transform: scale(0.95);
-            opacity: 0;
-            pointer-events: none;
-        }
-
         /* FAQ accordion styling */
         .faq-item input[type="checkbox"] {
             display: none;
@@ -102,14 +91,7 @@
                 </svg>
                 <h1 class="text-2xl font-bold text-gray-800">Veptra</h1>
             </a>
-            <div class="flex items-center space-x-4">
-                <button id="cart-button" class="relative p-2 rounded-full bg-blue-100 text-blue-600 hover:bg-blue-200 transition-colors">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.182 1.748.595 1.748H19.5a2.25 2.25 0 002.25-2.25V9m-3.5 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm-7.5 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
-                    </svg>
-                    <span id="cart-item-count" class="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full">0</span>
-                </button>
-            </div>
+            <!-- No cart button in this simplified version -->
         </div>
     </header>
 
@@ -117,6 +99,13 @@
     <main class="container mx-auto px-4 py-8">
         <h2 class="text-4xl font-extrabold text-gray-900 text-center mb-4">Our Products</h2>
         <p class="text-center text-gray-600 mb-8 max-w-2xl mx-auto">Explore our range of high-purity peptides for research purposes. All products are rigorously tested to ensure quality and authenticity.</p>
+
+        <!-- "How to Order" Button Section -->
+        <section class="flex justify-center mb-8">
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSf7T12fjvPF3OHuCqH93GCMXxWLY35Nn9hOIcHzFOrzCdv_9w/viewform?usp=sharing&ouid=100269413869875362351" target="_blank" class="inline-flex items-center justify-center bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg hover:bg-blue-700 transition-colors shadow-lg">
+                How to Order
+            </a>
+        </section>
 
         <!-- Short Description of Peptides -->
         <section id="peptide-description" class="bg-blue-50 border-l-4 border-blue-500 p-6 rounded-lg mb-8 shadow-sm">
@@ -189,7 +178,6 @@
                 </div>
             </div>
         </section>
-
     </main>
 
     <!-- Footer with Disclaimer -->
@@ -210,56 +198,6 @@
     </footer>
 
 
-    <!-- Shopping Cart Modal -->
-    <div id="cart-modal" class="modal fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center p-4 hidden z-50">
-        <div class="bg-white rounded-lg shadow-xl w-full max-w-2xl p-6 relative">
-            <button id="close-cart-modal" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-            </button>
-
-            <!-- Cart View -->
-            <div id="cart-view">
-                <h3 class="text-3xl font-bold mb-6 text-gray-800">Your Cart</h3>
-                <div id="cart-items" class="space-y-4 max-h-96 overflow-y-auto pr-2">
-                    <!-- Cart items will be dynamically added here -->
-                </div>
-                <div class="mt-6 pt-4 border-t border-gray-200">
-                    <div class="flex justify-between items-center font-bold text-xl text-gray-800">
-                        <span>Total:</span>
-                        <span id="cart-total-price">$0.00</span>
-                    </div>
-                    <button id="checkout-button" class="mt-6 w-full bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg hover:bg-blue-700 transition-colors">
-                        Proceed to Checkout
-                    </button>
-                </div>
-                <p id="empty-cart-message" class="text-center text-gray-500 mt-4 hidden">Your cart is empty.</p>
-            </div>
-        </div>
-    </div>
-
-
-    <!-- Product Detail Modal -->
-    <div id="product-modal" class="modal fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center p-4 hidden z-50">
-        <div class="bg-white rounded-lg shadow-xl w-full max-w-4xl p-8 relative">
-            <button id="close-product-modal" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-            </button>
-            <div id="product-detail-content" class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <!-- Product details will be injected here by JavaScript -->
-            </div>
-        </div>
-    </div>
-
-    <!-- Message Box for notifications -->
-    <div id="message-box" class="fixed bottom-6 right-6 z-[100] p-4 bg-green-500 text-white rounded-lg shadow-lg transform translate-y-full transition-transform duration-300 ease-out hidden">
-        Product added to cart!
-    </div>
-
-
     <script>
         // Sample product data
         const products = [{
@@ -267,7 +205,6 @@
                 name: 'BAC - Water 3ml',
                 price: 4.99,
                 description: 'Bacteriostatic water for reconstituting research peptides.',
-                longDescription: 'Bacteriostatic water (BAC Water) contains 0.9% benzyl alcohol as a preservative, which inhibits the growth of bacteria. It is the standard sterile solvent for reconstituting lyophilized (freeze-dried) peptides and other research chemicals, ensuring product stability and purity for multiple uses.',
                 image: 'https://placehold.co/400x400/F0F4F8/64748b?text=BAC-Water+3ml'
             },
             {
@@ -275,7 +212,6 @@
                 name: 'BAC - Water 10ml',
                 price: 8.99,
                 description: 'Larger volume of bacteriostatic water for multiple research vials.',
-                longDescription: 'A larger 10ml vial of bacteriostatic water, ideal for researchers who require a higher volume of sterile solvent for their studies. Provides the same preservative quality as the 3ml vial, ensuring the longevity and integrity of reconstituted peptides.',
                 image: 'https://placehold.co/400x400/F0F4F8/64748b?text=BAC-Water+10ml'
             },
             {
@@ -283,7 +219,6 @@
                 name: 'GHK-Cu',
                 price: 34.99,
                 description: 'A copper peptide naturally present in human plasma, known for its anti-aging properties.',
-                longDescription: 'GHK-Cu is a tripeptide that has been extensively studied for its ability to stimulate collagen synthesis, improve skin elasticity, and promote wound healing. It is a popular ingredient in cosmetic and anti-aging products.',
                 image: 'https://placehold.co/400x400/F0F4F8/64748b?text=GHK-Cu'
             },
             {
@@ -291,7 +226,6 @@
                 name: 'Selank',
                 price: 65.99,
                 description: 'A synthetic analog of the human body\'s tuftsin peptide, known for its anxiolytic effects.',
-                longDescription: 'Selank is a heptapeptide with potential nootropic, anxiolytic, and antiviral properties. It is a synthetic derivative of the naturally occurring immunomodulatory peptide tuftsin. Research suggests it may reduce anxiety and improve cognitive functions without sedative side effects.',
                 image: 'https://placehold.co/400x400/F0F4F8/64748b?text=Selank'
             },
             {
@@ -299,7 +233,6 @@
                 name: 'Semax',
                 price: 69.99,
                 description: 'A synthetic heptapeptide with neuroprotective and nootropic properties.',
-                longDescription: 'Semax is a synthetic peptide known for its potent nootropic and neuroprotective effects. It is a derivative of a portion of the ACTH molecule. Studies indicate it may enhance cognitive performance, memory, and attention, while also offering protection against various types of oxidative stress.',
                 image: 'https://placehold.co/400x400/F0F4F8/64748b?text=Semax'
             },
             {
@@ -307,7 +240,6 @@
                 name: 'Tirzepatide 5mg',
                 price: 99.99,
                 description: 'A dual GIP and GLP-1 receptor agonist for metabolic research.',
-                longDescription: 'This 5mg vial of Tirzepatide is a research-grade dual GIP and GLP-1 receptor agonist. It is used in studies focused on improving glycemic control and investigating its role in metabolic health and weight management. The low dose is suitable for initial research protocols.',
                 image: 'https://placehold.co/400x400/F0F4F8/64748b?text=Tirzepatide+5mg'
             },
             {
@@ -315,7 +247,6 @@
                 name: 'Tirzepatide 15mg',
                 price: 249.99,
                 description: 'A higher concentration of Tirzepatide for advanced metabolic research.',
-                longDescription: 'This 15mg vial of Tirzepatide provides a concentrated form of the dual GIP and GLP-1 receptor agonist. It is ideal for advanced research and studies requiring higher dosages, allowing for the exploration of more pronounced effects on glucose regulation and body composition.',
                 image: 'https://placehold.co/400x400/F0F4F8/64748b?text=Tirzepatide+15mg'
             },
             {
@@ -323,36 +254,21 @@
                 name: 'Tirzepatide 30mg',
                 price: 449.99,
                 description: 'The highest concentration of Tirzepatide for extensive metabolic and obesity studies.',
-                longDescription: 'This 30mg vial of Tirzepatide is the highest concentration available, intended for comprehensive and long-term research protocols. It facilitates extensive studies into the mechanisms behind its potent effects on metabolic syndromes, obesity, and related physiological pathways.',
                 image: 'https://placehold.co/400x400/F0F4F8/64748b?text=Tirzepatide+30mg'
             }
         ];
 
-        // Global state for the cart
-        let cart = [];
-
         // DOM elements
         const productGrid = document.getElementById('product-grid');
-        const cartButton = document.getElementById('cart-button');
-        const cartModal = document.getElementById('cart-modal');
-        const closeCartModalButton = document.getElementById('close-cart-modal');
-        const productModal = document.getElementById('product-modal');
-        const closeProductModalButton = document.getElementById('close-product-modal');
-        const productDetailContent = document.getElementById('product-detail-content');
-        const cartItemsContainer = document.getElementById('cart-items');
-        const cartTotalDisplay = document.getElementById('cart-total-price');
-        const cartItemCountSpan = document.getElementById('cart-item-count');
-        const emptyCartMessage = document.getElementById('empty-cart-message');
-        const messageBox = document.getElementById('message-box');
-        const checkoutButton = document.getElementById('checkout-button');
         const faqItems = document.querySelectorAll('.faq-item');
+        const googleFormUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSf7T12fjvPF3OHuCqH93GCMXxWLY35Nn9hOIcHzFOrzCdv_9w/viewform?usp=sharing&ouid=100269413869875362351';
 
         // Function to render the product grid
         function renderProducts() {
             productGrid.innerHTML = '';
             products.forEach(product => {
                 const productCard = document.createElement('div');
-                productCard.className = 'product-card bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow cursor-pointer flex flex-col items-center text-center';
+                productCard.className = 'product-card bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow flex flex-col items-center text-center cursor-pointer';
                 productCard.innerHTML = `
                     <img src="${product.image}" alt="${product.name}" class="rounded-lg mb-4 w-48 h-48 object-cover">
                     <h3 class="text-xl font-semibold text-gray-800 mb-2">${product.name}</h3>
@@ -361,161 +277,9 @@
                         <span class="text-2xl font-bold text-blue-600">$${product.price.toFixed(2)}</span>
                     </div>
                 `;
-                productCard.addEventListener('click', () => showProductDetails(product.id));
                 productGrid.appendChild(productCard);
             });
         }
-
-        // Function to show product details in a modal
-        function showProductDetails(id) {
-            const product = products.find(p => p.id === id);
-            if (!product) return;
-
-            productDetailContent.innerHTML = `
-                <div class="flex items-center justify-center">
-                    <img src="${product.image}" alt="${product.name}" class="rounded-lg max-w-full h-auto">
-                </div>
-                <div class="flex flex-col">
-                    <h2 class="text-3xl font-bold text-gray-900 mb-2">${product.name}</h2>
-                    <p class="text-lg text-gray-600 mb-4">$${product.price.toFixed(2)}</p>
-                    <p class="text-gray-700 leading-relaxed mb-6">${product.longDescription}</p>
-                    <button id="add-to-cart-btn" data-product-id="${product.id}" class="w-full bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg hover:bg-blue-700 transition-colors">
-                        Add to Cart
-                    </button>
-                </div>
-            `;
-            productModal.classList.remove('hidden');
-
-            document.getElementById('add-to-cart-btn').addEventListener('click', () => {
-                addItemToCart(product.id);
-                productModal.classList.add('hidden');
-            });
-        }
-
-        // Function to add an item to the cart
-        function addItemToCart(id) {
-            const product = products.find(p => p.id === id);
-            if (!product) return;
-
-            const existingItem = cart.find(item => item.id === id);
-            if (existingItem) {
-                existingItem.quantity++;
-            } else {
-                cart.push({
-                    ...product,
-                    quantity: 1
-                });
-            }
-            updateCart();
-            showMessageBox('Product added to cart!');
-        }
-
-        // Function to remove an item from the cart
-        function removeItemFromCart(id) {
-            cart = cart.filter(item => item.id !== id);
-            updateCart();
-            showMessageBox('Product removed from cart.');
-        }
-
-        // Function to update the cart UI
-        function updateCart() {
-            cartItemsContainer.innerHTML = '';
-            let total = 0;
-
-            if (cart.length === 0) {
-                emptyCartMessage.classList.remove('hidden');
-            } else {
-                emptyCartMessage.classList.add('hidden');
-            }
-
-            cart.forEach(item => {
-                total += item.price * item.quantity;
-                const cartItem = document.createElement('div');
-                cartItem.className = 'flex items-center justify-between p-4 bg-gray-100 rounded-lg';
-                cartItem.innerHTML = `
-                    <div class="flex items-center space-x-4">
-                        <img src="${item.image}" alt="${item.name}" class="w-16 h-16 rounded-lg object-cover">
-                        <div>
-                            <p class="font-semibold text-gray-800">${item.name}</p>
-                            <p class="text-sm text-gray-500">$${item.price.toFixed(2)} x ${item.quantity}</p>
-                        </div>
-                    </div>
-                    <button class="remove-item text-gray-400 hover:text-red-500 transition-colors" data-product-id="${item.id}">
-                      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
-                      </svg>
-                    </button>
-                `;
-                cartItemsContainer.appendChild(cartItem);
-
-                // Add event listener for the remove button
-                cartItem.querySelector('.remove-item').addEventListener('click', (e) => {
-                    const productId = parseInt(e.currentTarget.dataset.productId);
-                    removeItemFromCart(productId);
-                });
-            });
-
-            cartTotalDisplay.textContent = `$${total.toFixed(2)}`;
-            cartItemCountSpan.textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
-        }
-
-        // Function to display a message box
-        function showMessageBox(message) {
-            messageBox.textContent = message;
-            messageBox.classList.remove('hidden');
-            setTimeout(() => {
-                messageBox.style.transform = 'translateY(0)';
-            }, 10);
-            setTimeout(() => {
-                messageBox.style.transform = 'translateY(150%)';
-                setTimeout(() => {
-                    messageBox.classList.add('hidden');
-                }, 300);
-            }, 3000);
-        }
-
-        // Event listeners for modals
-        cartButton.addEventListener('click', () => {
-            cartModal.classList.remove('hidden');
-        });
-
-        closeCartModalButton.addEventListener('click', () => {
-            cartModal.classList.add('hidden');
-        });
-
-        closeProductModalButton.addEventListener('click', () => {
-            productModal.classList.add('hidden');
-        });
-
-        // Close modals when clicking outside
-        window.addEventListener('click', (e) => {
-            if (e.target === cartModal) {
-                cartModal.classList.add('hidden');
-            }
-            if (e.target === productModal) {
-                productModal.classList.add('hidden');
-            }
-        });
-
-        // Handle escape key to close modals
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                cartModal.classList.add('hidden');
-                productModal.classList.add('hidden');
-            }
-        });
-
-        // Event listener for checkout button to redirect to Google Form
-        checkoutButton.addEventListener('click', () => {
-            if (cart.length === 0) {
-                showMessageBox('Your cart is empty. Please add items to proceed.');
-                return;
-            }
-
-            // Replace this URL with your actual Google Form link
-            const googleFormUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSf7T12fjvPF3OHuCqH93GCMXxWLY35Nn9hOIcHzFOrzCdv_9w/viewform?usp=sharing&ouid=100269413869875362351';
-            window.open(googleFormUrl, '_blank');
-        });
 
         // Script to handle the FAQ accordion functionality
         faqItems.forEach(item => {
@@ -537,10 +301,8 @@
         // Initial render
         document.addEventListener('DOMContentLoaded', () => {
             renderProducts();
-            updateCart();
         });
     </script>
 </body>
 
 </html>
-
