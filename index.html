@@ -16,6 +16,11 @@
             color: #333;
         }
 
+        /* Prevent scrolling when modal is open */
+        body.overflow-hidden {
+            overflow: hidden;
+        }
+
         /* Custom scrollbar for better aesthetics */
         ::-webkit-scrollbar {
             width: 8px;
@@ -37,7 +42,6 @@
             background-color: #e3f2fd;
             background-image: linear-gradient(to top right, #e3f2fd, #bbdefb);
         }
-
     </style>
 </head>
 
@@ -226,6 +230,27 @@
                 <p class="text-gray-400 text-sm">&copy; 2024 Veptra. All rights reserved.</p>
             </div>
         </footer>
+    </main>
+
+    <!-- Product Detail Modal (Initially Hidden) -->
+    <div id="product-detail-modal" class="fixed inset-0 bg-gray-900 bg-opacity-75 z-[100] hidden justify-center items-center p-4" onclick="if(event.target.id === 'product-detail-modal') closeModal()">
+        <div class="bg-white rounded-xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto transform transition-all duration-300 relative p-6 md:p-8">
+
+            <!-- Close Button -->
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-500 hover:text-gray-900 transition-colors z-10">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+
+            <!-- Modal Content Area -->
+            <div id="modal-content-area" class="mt-4">
+                <!-- Content will be injected here -->
+            </div>
+
+        </div>
+    </div>
+
 
     <script>
         // Product data is updated to include the new 'Injection Pen Device'
@@ -309,16 +334,113 @@
         const checkoutForm = document.getElementById('checkout-form');
         const submitOrderBtn = document.getElementById('submit-order-btn');
 
+        // Modal DOM elements
+        const productDetailModal = document.getElementById('product-detail-modal');
+        const modalContentArea = document.getElementById('modal-content-area');
+
+
+        // Function to close the product detail modal
+        function closeModal() {
+            productDetailModal.classList.add('hidden');
+            productDetailModal.classList.remove('flex');
+            document.body.classList.remove('overflow-hidden');
+        }
+
+        // Function to display the product details in the modal
+        function showProductDetails(product) {
+            modalContentArea.innerHTML = `
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Product Image -->
+                    <div class="p-2 border rounded-xl bg-gray-50 flex items-center justify-center">
+                        <img src="${product.image}" alt="${product.name}" class="rounded-lg max-h-[60vh] w-full object-contain shadow-md">
+                    </div>
+
+                    <!-- Product Details and Order Form -->
+                    <div class="flex flex-col space-y-6">
+                        <h2 class="text-4xl font-extrabold text-gray-900">${product.name}</h2>
+                        <p class="text-2xl font-bold text-blue-600">₱${product.price}</p>
+                        
+                        <div>
+                            <h3 class="text-xl font-semibold mb-2 text-gray-800">Product Overview</h3>
+                            <p class="text-gray-700 leading-relaxed">${product.description}</p>
+                        </div>
+
+                        <!-- Dosage/Purity Placeholder (Enhanced Detail) -->
+                        <div class="bg-blue-50 p-4 rounded-lg">
+                            <h4 class="font-semibold text-gray-800">Research Specifications:</h4>
+                            <ul class="list-disc list-inside text-sm text-gray-600 mt-1">
+                                <li>Purity: ${product.id < 7 ? '99%+' : 'HPLC Verified'}</li>
+                                <li>Format: Lyophilized Powder / Device</li>
+                                <li>Storage: Store at -20°C or below</li>
+                            </ul>
+                        </div>
+
+                        <!-- Add to Cart (Inside Modal) -->
+                        <div class="flex flex-col sm:flex-row items-stretch sm:items-center space-y-4 sm:space-y-0 sm:space-x-4 pt-4 border-t">
+                            <div class="flex items-center space-x-2">
+                                <label for="modal-quantity-${product.id}" class="text-gray-700 font-medium">Quantity:</label>
+                                <input type="number" id="modal-quantity-${product.id}" value="1" min="1" class="w-20 text-center border rounded-md border-gray-300 shadow-sm focus:ring-blue-200 focus:border-blue-300">
+                            </div>
+                            <button id="modal-add-to-cart-btn" class="bg-green-600 text-white font-semibold py-3 px-6 rounded-full hover:bg-green-700 transition-colors flex-grow" data-id="${product.id}">
+                                Add to Cart
+                            </button>
+                        </div>
+
+                        <div class="text-xs text-red-500 pt-2 text-center">
+                            <p>**FOR RESEARCH USE ONLY. NOT FOR HUMAN CONSUMPTION.**</p>
+                        </div>
+
+                    </div>
+                </div>
+            `;
+
+            // Show the modal
+            productDetailModal.classList.remove('hidden');
+            productDetailModal.classList.add('flex');
+            document.body.classList.add('overflow-hidden'); // Prevent scrolling body when modal is open
+
+            // Attach listener for modal's Add to Cart button
+            document.getElementById('modal-add-to-cart-btn').addEventListener('click', (event) => {
+                const productId = parseInt(event.target.dataset.id);
+                const quantityInput = document.getElementById(`modal-quantity-${productId}`);
+                const quantity = parseInt(quantityInput.value);
+                const productToAdd = products.find(p => p.id === productId);
+
+                if (productToAdd && quantity > 0) {
+                    const existingCartItem = cart.find(item => item.id === productId);
+                    if (existingCartItem) {
+                        existingCartItem.quantity += quantity;
+                    } else {
+                        cart.push({ ...productToAdd, quantity });
+                    }
+                    updateCart();
+                    closeModal(); // Close modal after adding to cart for immediate view of cart
+                }
+            });
+        }
+
+        // Global listener for Escape key to close modal
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !productDetailModal.classList.contains('hidden')) {
+                closeModal();
+            }
+        });
+
+
         // Function to render the product grid
         function renderProducts() {
             productGrid.innerHTML = '';
             products.forEach(product => {
                 const productCard = document.createElement('div');
-                productCard.className = 'product-card bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow flex flex-col items-center text-center cursor-pointer';
+                // Removed cursor-pointer from card wrapper, now applied to .product-info
+                productCard.className = 'product-card bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow flex flex-col items-center text-center';
+
                 productCard.innerHTML = `
-                    <img src="${product.image}" alt="${product.name}" class="rounded-lg mb-4 w-48 h-48 object-cover">
-                    <h3 class="text-xl font-semibold text-gray-800 mb-2">${product.name}</h3>
-                    <p class="text-sm text-gray-500 flex-grow mb-4">${product.description}</p>
+                    <div class="product-info cursor-pointer w-full flex flex-col items-center" data-id="${product.id}">
+                        <img src="${product.image}" alt="${product.name}" class="rounded-lg mb-4 w-48 h-48 object-cover transition-transform hover:scale-[1.02]">
+                        <h3 class="text-xl font-semibold text-gray-800 mb-2">${product.name}</h3>
+                        <p class="text-sm text-gray-500 flex-grow mb-4">${product.description}</p>
+                    </div>
                     <div class="mt-auto w-full flex flex-col items-center space-y-2">
                         <span class="text-2xl font-bold text-blue-600">₱${product.price}</span>
                         <div class="flex items-center space-x-2">
@@ -328,6 +450,12 @@
                         <button class="add-to-cart-btn bg-blue-600 text-white font-semibold py-2 px-4 rounded-full hover:bg-blue-700 transition-colors" data-id="${product.id}">Add to Cart</button>
                     </div>
                 `;
+                
+                // Attach click handler for modal to the product-info area only
+                productCard.querySelector('.product-info').addEventListener('click', () => {
+                    showProductDetails(product);
+                });
+
                 productGrid.appendChild(productCard);
             });
             attachAddToCartListeners();
@@ -336,6 +464,8 @@
         function attachAddToCartListeners() {
             document.querySelectorAll('.add-to-cart-btn').forEach(button => {
                 button.addEventListener('click', (event) => {
+                    event.stopPropagation(); // CRUCIAL: Prevent click from bubbling up to .product-info and opening the modal
+
                     const productId = parseInt(event.target.dataset.id);
                     const quantityInput = document.getElementById(`quantity-${productId}`);
                     const quantity = parseInt(quantityInput.value);
@@ -355,6 +485,13 @@
                     }
                 });
             });
+            
+            // Also stop propagation on the quantity inputs to prevent modal opening
+            document.querySelectorAll('.product-card input[type="number"]').forEach(input => {
+                input.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                });
+            });
         }
 
         function updateCart() {
@@ -371,7 +508,7 @@
                     const cartItemEl = document.createElement('div');
                     cartItemEl.className = 'flex items-center space-x-4 border rounded-lg p-4 bg-gray-50';
                     cartItemEl.innerHTML = `
-                        <img src="${item.image}" alt="${item.name}" class="w-16 h-16 rounded-lg">
+                        <img src="${item.image}" alt="${item.name}" class="w-16 h-16 rounded-lg object-cover">
                         <div class="flex-grow">
                             <h4 class="font-semibold text-gray-800">${item.name}</h4>
                             <p class="text-sm text-gray-600">₱${item.price} x ${item.quantity}</p>
@@ -442,8 +579,3 @@
 </body>
 
 </html>
-
-
-
-
-
