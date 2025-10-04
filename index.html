@@ -38,29 +38,6 @@
             background-image: linear-gradient(to top right, #e3f2fd, #bbdefb);
         }
 
-        /* Styling for the custom message box */
-        .message-box-backdrop {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-        }
-
-        .message-box-content {
-            background: white;
-            padding: 24px;
-            border-radius: 12px;
-            max-width: 90%;
-            width: 400px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-            text-align: center;
-        }
     </style>
 </head>
 
@@ -122,7 +99,7 @@
             </div>
         </section>
 
-        <!-- Checkout Section (Now uses Fetch API to submit) -->
+        <!-- Checkout Section -->
         <section id="checkout" class="my-16">
             <h2 class="text-4xl font-extrabold text-gray-900 text-center mb-8">Your Order</h2>
             <div class="max-w-3xl mx-auto bg-white p-8 rounded-xl shadow-lg">
@@ -138,30 +115,27 @@
                         <span id="order-total" class="text-blue-600">₱0</span>
                     </p>
                 </div>
-                <!-- Form is now set up for AJAX submission -->
                 <form id="checkout-form" class="mt-8">
                     <h3 class="text-2xl font-semibold text-gray-800 mb-4">Client Information</h3>
                     <div class="space-y-4">
                         <label class="block">
                             <span class="text-gray-700 font-medium">Your Name</span>
-                            <input type="text" id="client-name" name="name" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 p-2.5">
+                            <input type="text" id="client-name" name="name" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
                         </label>
                         <label class="block">
                             <span class="text-gray-700 font-medium">Contact Number</span>
-                            <input type="tel" id="client-phone" name="phone" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 p-2.5">
+                            <input type="tel" id="client-phone" name="phone" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
                         </label>
                         <label class="block">
                             <span class="text-gray-700 font-medium">Email Address</span>
-                            <input type="email" id="client-email" name="email" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 p-2.5">
+                            <input type="email" id="client-email" name="email" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
                         </label>
-                        <!-- Hidden field to hold the full structured order data -->
-                        <textarea name="order_summary" id="order-summary-input" hidden></textarea>
                     </div>
                     <button type="submit" id="submit-order-btn" class="mt-8 w-full bg-green-600 text-white font-semibold py-3 px-6 rounded-lg hover:bg-green-700 transition-colors shadow-lg disabled:bg-gray-400 disabled:cursor-not-allowed" disabled>
-                        Send Order Directly
+                        Submit Order
                     </button>
                     <p class="mt-4 text-sm text-center text-gray-500">
-                        By clicking "Send Order Directly", the order will be submitted via API.
+                        By clicking "Submit Order", a new email will be created with your order details.
                     </p>
                 </form>
             </div>
@@ -209,30 +183,28 @@
             </div>
         </section>
 
-        <!-- Contact Us Section (MOBILE FRIENDLY BLOCKS) -->
+        <!-- Contact Us Section (UPDATED) -->
         <section id="contact-us" class="my-16">
             <h2 class="text-4xl font-extrabold text-gray-900 text-center mb-8">Contact Us</h2>
             <div class="max-w-3xl mx-auto bg-white p-8 rounded-xl shadow-lg text-center">
-                <p class="text-gray-700 mb-8 font-semibold text-xl">We are available through:</p>
-                <div class="flex flex-col sm:flex-row justify-center items-center space-y-6 sm:space-y-0 sm:space-x-8">
+                <p class="text-gray-700 mb-6 font-semibold text-xl">We are available through:</p>
+                <div class="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-8">
 
-                    <!-- Viber Link (Touch Target Enhanced) -->
-                    <a href="viber://chat?number=+639190774570" class="inline-flex flex-col items-center space-y-2 p-6 w-full max-w-xs sm:w-auto bg-purple-50 rounded-xl hover:bg-purple-100 transition-colors shadow-md text-purple-600 hover:text-purple-800 font-semibold group transform hover:scale-[1.02]">
+                    <!-- Viber Link (Updated to open chat instead of call) -->
+                    <a href="viber://chat?number=+639190774570" class="inline-flex items-center space-x-2 text-purple-600 hover:text-purple-700 transition-colors font-semibold group">
                         <!-- Generic Chat/Communication Icon for Viber -->
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 group-hover:scale-105 transition-transform" viewBox="0 0 24 24" fill="currentColor">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 group-hover:scale-105 transition-transform" viewBox="0 0 24 24" fill="currentColor">
                             <path d="M20 2H4C2.9 2 2 2.9 2 4v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM10 13H7c-.55 0-1-.45-1-1s.45-1 1-1h3c.55 0 1 .45 1 1s-.45 1-1 1zm4 0h-3c-.55 0-1-.45-1-1s.45-1 1-1h3c.55 0 1 .45 1 1s-.45 1-1 1zm4 0h-3c-.55 0-1-.45-1-1s.45-1 1-1h3c.55 0 1 .45 1 1s-.45 1-1 1z"/>
                         </svg>
-                        <span class="text-lg">Message on Viber</span>
-                        <span class="text-sm text-gray-500">(09190774570)</span>
+                        <span>Viber (09190774570)</span>
                     </a>
 
-                    <!-- Email Link (Touch Target Enhanced) -->
-                    <a href="mailto:veptraph@gmail.com" class="inline-flex flex-col items-center space-y-2 p-6 w-full max-w-xs sm:w-auto bg-blue-50 rounded-xl hover:bg-blue-100 transition-colors shadow-md text-blue-600 hover:text-blue-800 font-semibold group transform hover:scale-[1.02]">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 group-hover:scale-105 transition-transform" viewBox="0 0 24 24" fill="currentColor">
+                    <!-- Email Link (Unchanged) -->
+                    <a href="mailto:veptraph@gmail.com" class="inline-flex items-center space-x-2 text-blue-600 hover:text-blue-700 transition-colors font-semibold group">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 group-hover:scale-105 transition-transform" viewBox="0 0 24 24" fill="currentColor">
                             <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
                         </svg>
-                        <span class="text-lg">Send an Email</span>
-                        <span class="text-sm text-gray-500">(veptraph@gmail.com)</span>
+                        <span>Email (veptraph@gmail.com)</span>
                     </a>
                 </div>
             </div>
@@ -254,13 +226,6 @@
                 <p class="text-gray-400 text-sm">&copy; 2024 Veptra. All rights reserved.</p>
             </div>
         </footer>
-    
-        <!-- Message Box Container -->
-        <div id="message-box" class="message-box-backdrop hidden">
-            <div id="message-box-content" class="message-box-content">
-                <!-- Content injected by JavaScript -->
-            </div>
-        </div>
 
     <script>
         // Product data is unchanged from the last step
@@ -318,9 +283,6 @@
 
         let cart = [];
 
-        // API Placeholder URL
-        const ORDER_API_ENDPOINT = 'https://your-serverless-function.com/send-order';
-        
         // DOM elements
         const productGrid = document.querySelector('#product-list > div');
         const cartSummary = document.getElementById('cart-summary');
@@ -329,42 +291,8 @@
         const orderTotalDisplay = document.getElementById('order-total');
         const checkoutForm = document.getElementById('checkout-form');
         const submitOrderBtn = document.getElementById('submit-order-btn');
-        const orderSummaryInput = document.getElementById('order-summary-input');
-        const messageBox = document.getElementById('message-box');
-        const messageBoxContent = document.getElementById('message-box-content');
-        
-        // Custom message box utility function (Replaces alert())
-        function showMessageBox(title, body, type = 'info') {
-            let iconHtml = '';
-            let color = 'text-blue-500';
-            if (type === 'success') {
-                iconHtml = `<svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mx-auto mb-3" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>`;
-                color = 'text-green-600';
-            } else if (type === 'error') {
-                iconHtml = `<svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mx-auto mb-3" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>`;
-                color = 'text-red-600';
-            } else if (type === 'api_info') {
-                 iconHtml = `<svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mx-auto mb-3" viewBox="0 0 24 24" fill="currentColor"><path d="M11 15h2v2h-2zm0-8h2v6h-2zm.99-5C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/></svg>`;
-                color = 'text-yellow-600';
-            }
 
-            messageBoxContent.innerHTML = `
-                <div class="${color}">
-                    ${iconHtml}
-                </div>
-                <h4 class="text-xl font-bold mb-3">${title}</h4>
-                <p class="text-gray-700 mb-6 text-sm">${body}</p>
-                <button id="close-message-box" class="bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors">OK</button>
-            `;
-            messageBox.classList.remove('hidden');
-
-            document.getElementById('close-message-box').onclick = () => {
-                messageBox.classList.add('hidden');
-            };
-        }
-
-
-        // Function to render the product grid (unchanged)
+        // Function to render the product grid
         function renderProducts() {
             productGrid.innerHTML = '';
             products.forEach(product => {
@@ -459,75 +387,33 @@
             });
         }
 
-        // Handle form submission with Fetch API
-        checkoutForm.addEventListener('submit', async (event) => {
+        // Handle form submission with mailto
+        checkoutForm.addEventListener('submit', (event) => {
             event.preventDefault();
 
-            // 1. Collect Client Data
             const clientName = document.getElementById('client-name').value;
             const clientPhone = document.getElementById('client-phone').value;
             const clientEmail = document.getElementById('client-email').value;
 
-            // 2. Prepare Structured Order Data
-            const orderItems = cart.map(item => ({
-                name: item.name,
-                quantity: item.quantity,
-                unit_price: item.price,
-                total_item_price: item.price * item.quantity
-            }));
-            const totalAmount = orderItems.reduce((sum, item) => sum + item.total_item_price, 0);
-
-            const payload = {
-                client: {
-                    name: clientName,
-                    phone: clientPhone,
-                    email: clientEmail
-                },
-                order_details: orderItems,
-                total_amount: totalAmount,
-                timestamp: new Date().toISOString()
-            };
-
-            // Convert the structured data to a clean JSON string for the hidden field 
-            // and potential API consumption.
-            const payloadString = JSON.stringify(payload, null, 2);
-            orderSummaryInput.value = payloadString;
+            const orderDetails = cart.map(item =>
+                `${item.name} - Quantity: ${item.quantity} - Total: ₱${(item.price * item.quantity)}`
+            ).join('\n');
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
             
-            // --- This block is the core change for API submission ---
+            const emailBody = `--- Client Information ---\n` +
+                `Name: ${clientName}\n` +
+                `Contact Number: ${clientPhone}\n` +
+                `Email: ${clientEmail}\n\n` +
+                `--- Order Details ---\n` +
+                `${orderDetails}\n\n` +
+                `Order Total: ₱${total}`;
 
-            showMessageBox(
-                'Submission Setup Required',
-                `The form is ready to submit the order directly via an API call! 
-                <br><br>
-                **Next Step:** In a production environment, you must replace the placeholder URL with your active serverless function or email service endpoint.
-                <br><br>
-                **Placeholder API Endpoint:** <code class="bg-gray-200 p-1 rounded-md text-xs block mt-2 whitespace-normal">${ORDER_API_ENDPOINT}</code>`,
-                'api_info'
-            );
-            
-            // In a real application, you would proceed with the fetch call:
-            /*
-            try {
-                const response = await fetch(ORDER_API_ENDPOINT, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(payload)
-                });
+            const subject = encodeURIComponent(`New Veptra Order from ${clientName}`);
+            const body = encodeURIComponent(emailBody);
+            // mailto destination confirmed as veptraph@gmail.com
+            const mailtoLink = `mailto:veptraph@gmail.com?subject=${subject}&body=${body}`;
 
-                if (response.ok) {
-                    showMessageBox('Order Sent!', 'Thank you! Your order has been submitted directly and we will contact you shortly.', 'success');
-                    // Optional: Clear cart and form here
-                } else {
-                    const errorText = await response.text();
-                    showMessageBox('Submission Failed', \`There was an issue processing your order. Server response: \${errorText}.\`, 'error');
-                }
-            } catch (error) {
-                showMessageBox('Connection Error', 'Could not connect to the order processing service. Please check your network or try again later.', 'error');
-            }
-            */
-            // --- End of core change ---
+            window.location.href = mailtoLink;
         });
 
         // Initialize on page load
@@ -539,3 +425,4 @@
 </body>
 
 </html>
+
