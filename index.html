@@ -211,55 +211,55 @@
         </footer>
 
     <script>
-        // Sample product data
+        // Updated product data with simplified descriptions and new placeholder image text
         const products = [
             {
                 id: 7,
                 name: 'Tirzepatide 15mg',
                 price: 2500,
-                description: 'Includes:<br>1 x bac water<br>5 x insulin syringe<br>1 x 3ml syringe<br>12 x alcohol pads<br>1 x vial case<br><br>for weight management',
-                image: 'https://placehold.co/400x400/F0F4F8/64748b?text=Tirzepatide+15mg'
+                description: 'A dual GIP/GLP-1 receptor agonist for scientific research, often studied for its effects on weight management and glucose regulation.',
+                image: 'https://placehold.co/400x400/F0F4F8/64748b?text=T15'
             },
             {
                 id: 8,
                 name: 'Tirzepatide 30mg',
                 price: 4000,
-                description: 'Includes:<br>1 x bac water<br>8 x insulin syringe<br>1 x 3ml syringe<br>19 x alcohol pads<br>1 x vial case<br><br>for weight management',
-                image: 'https://placehold.co/400x400/F0F4F8/64748b?text=Tirzepatide+30mg'
+                description: 'A higher-concentration research compound for dual GIP/GLP-1 receptor studies.',
+                image: 'https://placehold.co/400x400/F0F4F8/64748b?text=T30'
             },
             {
                 id: 3,
                 name: 'GHK-Cu',
                 price: 1000,
-                description: 'Includes:<br>1 x bac water<br>28 x insulin syringe<br>1 x 3ml syringe<br>58 x alcohol pads<br>1 x vial case<br><br>for skin and hair',
+                description: 'A copper peptide complex widely researched for its role in tissue regeneration, skin health, and anti-inflammatory mechanisms.',
                 image: 'https://placehold.co/400x400/F0F4F8/64748b?text=GHK-Cu'
             },
             {
                 id: 4,
                 name: 'Selank',
                 price: 1300,
-                description: 'Includes:<br>1x bac water<br>1x 3ml syringe<br>2x alcohol pads<br>1x nasal spray bottle<br><br>Boosts mood, reduces anxiety',
-                image: 'https://placehold.co/400x400/F0F4F8/64748b?text=Selank'
+                description: 'A synthetic peptide known for its anxiolytic and nootropic properties, often studied for anxiety and cognitive enhancement.',
+                image: 'https://placehold.co/400x400/F0F4F8/64748b?text=SELANK'
             },
             {
                 id: 5,
                 name: 'Semax',
                 price: 1300,
-                description: 'Includes:<br>1x bac water<br>1x 3ml syringe<br>2x alcohol pads<br>1x nasal spray bottle<br><br>Enhance focus, memory and neuroprotection',
-                image: 'https://placehold.co/400x400/F0F4F8/64748b?text=Semax'
+                description: 'A nootropic peptide studied for its effects on memory, focus, and neuroprotective capabilities.',
+                image: 'https://placehold.co/400x400/F0F4F8/64748b?text=SEMAX'
             },
             {
                 id: 9,
                 name: 'Retatrutide 10mg',
                 price: 2500,
-                description: 'Includes:<br>1 x bac water<br>6 x insulin syringe<br>1 x 3ml syringe<br>14 x alcohol pads<br>1 x vial case<br><br>for weight management',
-                image: 'https://placehold.co/400x400/F0F4F8/64748b?text=Retatrutide 10mg'
+                description: 'A triple-agonist peptide (GIP, GLP-1, Glucagon) undergoing research for its potent effects on metabolism and weight loss studies.',
+                image: 'https://placehold.co/400x400/F0F4F8/64748b?text=R10'
             },
             {
                 id: 10,
                 name: 'KPV',
                 price: 1000,
-                description: 'A tripeptide with potent anti-inflammatory and antimicrobial properties.',
+                description: 'A tripeptide with potent anti-inflammatory and antimicrobial properties, derived from the alpha-MSH hormone.',
                 image: 'https://placehold.co/400x400/F0F4F8/64748b?text=KPV'
             }
         ];
@@ -393,7 +393,7 @@
 
             const subject = encodeURIComponent(`New Veptra Order from ${clientName}`);
             const body = encodeURIComponent(emailBody);
-            // The mailto destination is set here:
+            // mailto destination confirmed as veptraph@gmail.com
             const mailtoLink = `mailto:veptraph@gmail.com?subject=${subject}&body=${body}`;
 
             window.location.href = mailtoLink;
