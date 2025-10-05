@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Veptra</title>
+    <title>Veptra - Research Peptides</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -14,11 +14,6 @@
             font-family: 'Inter', sans-serif;
             background-color: #f7f9fb;
             color: #333;
-        }
-
-        /* Prevent scrolling when modal is open */
-        body.overflow-hidden {
-            overflow: hidden;
         }
 
         /* Custom scrollbar for better aesthetics */
@@ -53,8 +48,8 @@
             <a href="#home" class="flex items-center space-x-2">
                 <!-- Updated with a new SVG logo -->
               <img src="https://github.com/user-attachments/assets/03fe1e16-de45-4ebc-8915-82e7e14a999a"
-                    alt="Veptra Logo"
-                    class="h-10 w-10 rounded-full object-cover shadow-md border border-gray-100">
+                        alt="Veptra Logo"
+                        class="h-10 w-10 rounded-full object-cover shadow-md border border-gray-100">
                 <h1 class="text-2xl font-bold text-gray-800">Veptra</h1>
             </a>
             <!-- Navigation Links -->
@@ -183,12 +178,21 @@
             </div>
         </section>
 
-        <!-- Contact Us Section (UPDATED) -->
+        <!-- Contact Us Section (UPDATED with WhatsApp) -->
         <section id="contact-us" class="my-16">
             <h2 class="text-4xl font-extrabold text-gray-900 text-center mb-8">Contact Us</h2>
             <div class="max-w-3xl mx-auto bg-white p-8 rounded-xl shadow-lg text-center">
                 <p class="text-gray-700 mb-6 font-semibold text-xl">We are available through:</p>
                 <div class="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-8">
+
+                    <!-- NEW: WhatsApp Link -->
+                    <a href="https://wa.me/639761483643" target="_blank" class="inline-flex items-center space-x-2 text-green-600 hover:text-green-700 transition-colors font-semibold group">
+                        <!-- WhatsApp Icon (SVG) -->
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 group-hover:scale-105 transition-transform" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12.01 2C6.49 2 2 6.49 2 12s4.49 10 10.01 10c5.52 0 10-4.49 10-10S17.53 2 12.01 2zm4.56 14.65c-.09.34-.33.56-.63.56-.27 0-.53-.13-.76-.38l-1.39-.9a7.35 7.35 0 01-1.22.46c-.03 0-.06.01-.09.01a6.68 6.68 0 01-2.91-.79 7.7 7.7 0 01-3.17-3.17c-.12-.22-.22-.45-.3-.68-.13-.42-.19-.87-.19-1.34 0-1.07.41-2.07 1.14-2.82.72-.75 1.67-1.16 2.68-1.16.5 0 .97.16 1.34.46.12.1.2.22.25.35l.08.2.06.15c.03.07.06.13.06.2 0 .15-.05.3-.13.43-.07.12-.19.26-.29.38l-.75.75c-.13.13-.2.32-.2.52 0 .2.08.39.23.53l.3.3c.6.6 1.34 1 2.15 1.15l.3.06c.13.03.26.04.4.04.2 0 .38-.08.52-.23l.75-.75c.13-.13.32-.2.52-.2h.01c.21 0 .4.08.53.23l.18.23c.3.37.52.8.63 1.25.07.3.07.65 0 .93-.09.28-.27.53-.53.76z"/>
+                        </svg>
+                        <span>WhatsApp (09761483643)</span>
+                    </a>
 
                     <!-- Viber Link (Updated to open chat instead of call) -->
                     <a href="viber://chat?number=+639190774570" class="inline-flex items-center space-x-2 text-purple-600 hover:text-purple-700 transition-colors font-semibold group">
@@ -227,26 +231,6 @@
             </div>
         </footer>
     </main>
-
-    <!-- Product Detail Modal (Initially Hidden) -->
-    <div id="product-detail-modal" class="fixed inset-0 bg-gray-900 bg-opacity-75 z-[100] hidden justify-center items-center p-4" onclick="if(event.target.id === 'product-detail-modal') closeModal()">
-        <div class="bg-white rounded-xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto transform transition-all duration-300 relative p-6 md:p-8">
-
-            <!-- Close Button -->
-            <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-500 hover:text-gray-900 transition-colors z-10">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-            </button>
-
-            <!-- Modal Content Area -->
-            <div id="modal-content-area" class="mt-4">
-                <!-- Content will be injected here -->
-            </div>
-
-        </div>
-    </div>
-
 
     <script>
         // Product data is updated to include the new 'Injection Pen Device'
@@ -300,7 +284,7 @@
                 description: 'A tripeptide with potent anti-inflammatory and antimicrobial properties, derived from the alpha-MSH hormone.',
                 image: 'https://placehold.co/400x400/F0F4F8/64748b?text=KPV'
             },
-            // --- NEW PRODUCT ADDED HERE ---
+            // --- PRODUCTS (including device/cartridge, now with local image URLs) ---
             {
                 id: 11,
                 name: 'V1 Slim',
@@ -313,10 +297,8 @@
                 name: 'Sterilized 3ml Pen Cartridge',
                 price: 70, 
                 description: 'Sterile, empty glass cartridge designed to safely hold 3ml of reconstituted research peptide solutions. Compatible with various pen injectors. For laboratory use only.',
-                // Using a placeholder that explicitly says "3ml Cartridge"
                 image: 'https://github.com/user-attachments/assets/348e2c86-479d-4d3d-ba36-9418f8a19bb6'
             }
-            // -----------------------------
         ];
 
         let cart = [];
@@ -330,110 +312,19 @@
         const checkoutForm = document.getElementById('checkout-form');
         const submitOrderBtn = document.getElementById('submit-order-btn');
 
-        // Modal DOM elements
-        const productDetailModal = document.getElementById('product-detail-modal');
-        const modalContentArea = document.getElementById('modal-content-area');
-
-
-        // Function to close the product detail modal
-        function closeModal() {
-            productDetailModal.classList.add('hidden');
-            productDetailModal.classList.remove('flex');
-            document.body.classList.remove('overflow-hidden');
-        }
-
-        // Function to display the product details in the modal
-        function showProductDetails(product) {
-            modalContentArea.innerHTML = `
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <!-- Product Image -->
-                    <div class="p-2 border rounded-xl bg-gray-50 flex items-center justify-center">
-                        <img src="${product.image}" alt="${product.name}" class="rounded-lg max-h-[60vh] w-full object-contain shadow-md">
-                    </div>
-
-                    <!-- Product Details and Order Form -->
-                    <div class="flex flex-col space-y-6">
-                        <h2 class="text-4xl font-extrabold text-gray-900">${product.name}</h2>
-                        <p class="text-2xl font-bold text-blue-600">₱${product.price}</p>
-                        
-                        <div>
-                            <h3 class="text-xl font-semibold mb-2 text-gray-800">Product Overview</h3>
-                            <p class="text-gray-700 leading-relaxed">${product.description}</p>
-                        </div>
-
-                        <!-- Dosage/Purity Placeholder (Enhanced Detail) -->
-                        <div class="bg-blue-50 p-4 rounded-lg">
-                            <h4 class="font-semibold text-gray-800">Research Specifications:</h4>
-                            <ul class="list-disc list-inside text-sm text-gray-600 mt-1">
-                                <li>Purity: ${product.id < 7 ? '99%+' : 'HPLC Verified'}</li>
-                                <li>Format: Lyophilized Powder / Device</li>
-                                <li>Storage: Store at -20°C or below</li>
-                            </ul>
-                        </div>
-
-                        <!-- Add to Cart (Inside Modal) -->
-                        <div class="flex flex-col sm:flex-row items-stretch sm:items-center space-y-4 sm:space-y-0 sm:space-x-4 pt-4 border-t">
-                            <div class="flex items-center space-x-2">
-                                <label for="modal-quantity-${product.id}" class="text-gray-700 font-medium">Quantity:</label>
-                                <input type="number" id="modal-quantity-${product.id}" value="1" min="1" class="w-20 text-center border rounded-md border-gray-300 shadow-sm focus:ring-blue-200 focus:border-blue-300">
-                            </div>
-                            <button id="modal-add-to-cart-btn" class="bg-green-600 text-white font-semibold py-3 px-6 rounded-full hover:bg-green-700 transition-colors flex-grow" data-id="${product.id}">
-                                Add to Cart
-                            </button>
-                        </div>
-
-                        <div class="text-xs text-red-500 pt-2 text-center">
-                            <p>**FOR RESEARCH USE ONLY. NOT FOR HUMAN CONSUMPTION.**</p>
-                        </div>
-
-                    </div>
-                </div>
-            `;
-
-            // Show the modal
-            productDetailModal.classList.remove('hidden');
-            productDetailModal.classList.add('flex');
-            document.body.classList.add('overflow-hidden'); // Prevent scrolling body when modal is open
-
-            // Attach listener for modal's Add to Cart button
-            document.getElementById('modal-add-to-cart-btn').addEventListener('click', (event) => {
-                const productId = parseInt(event.target.dataset.id);
-                const quantityInput = document.getElementById(`modal-quantity-${productId}`);
-                const quantity = parseInt(quantityInput.value);
-                const productToAdd = products.find(p => p.id === productId);
-
-                if (productToAdd && quantity > 0) {
-                    const existingCartItem = cart.find(item => item.id === productId);
-                    if (existingCartItem) {
-                        existingCartItem.quantity += quantity;
-                    } else {
-                        cart.push({ ...productToAdd, quantity });
-                    }
-                    updateCart();
-                    closeModal(); // Close modal after adding to cart for immediate view of cart
-                }
-            });
-        }
-
-        // Global listener for Escape key to close modal
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && !productDetailModal.classList.contains('hidden')) {
-                closeModal();
-            }
-        });
-
 
         // Function to render the product grid
         function renderProducts() {
             productGrid.innerHTML = '';
             products.forEach(product => {
                 const productCard = document.createElement('div');
-                // Removed cursor-pointer from card wrapper, now applied to .product-info
+                // The entire card is now a simple container, removing the click handler for the modal
                 productCard.className = 'product-card bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow flex flex-col items-center text-center';
 
                 productCard.innerHTML = `
-                    <div class="product-info cursor-pointer w-full flex flex-col items-center" data-id="${product.id}">
-                        <img src="${product.image}" alt="${product.name}" class="rounded-lg mb-4 w-48 h-48 object-cover transition-transform hover:scale-[1.02]">
+                    <div class="w-full flex flex-col items-center flex-grow">
+                        <!-- Image is now static and unclickable -->
+                        <img src="${product.image}" alt="${product.name}" class="rounded-lg mb-4 w-48 h-48 object-cover">
                         <h3 class="text-xl font-semibold text-gray-800 mb-2">${product.name}</h3>
                         <p class="text-sm text-gray-500 flex-grow mb-4">${product.description}</p>
                     </div>
@@ -447,11 +338,7 @@
                     </div>
                 `;
                 
-                // Attach click handler for modal to the product-info area only
-                productCard.querySelector('.product-info').addEventListener('click', () => {
-                    showProductDetails(product);
-                });
-
+                // No click handler for modal, simplifying the interaction.
                 productGrid.appendChild(productCard);
             });
             attachAddToCartListeners();
@@ -460,8 +347,6 @@
         function attachAddToCartListeners() {
             document.querySelectorAll('.add-to-cart-btn').forEach(button => {
                 button.addEventListener('click', (event) => {
-                    event.stopPropagation(); // CRUCIAL: Prevent click from bubbling up to .product-info and opening the modal
-
                     const productId = parseInt(event.target.dataset.id);
                     const quantityInput = document.getElementById(`quantity-${productId}`);
                     const quantity = parseInt(quantityInput.value);
@@ -479,13 +364,6 @@
                         updateCart();
                         quantityInput.value = 1; // Reset quantity input
                     }
-                });
-            });
-            
-            // Also stop propagation on the quantity inputs to prevent modal opening
-            document.querySelectorAll('.product-card input[type="number"]').forEach(input => {
-                input.addEventListener('click', (e) => {
-                    e.stopPropagation();
                 });
             });
         }
@@ -530,7 +408,8 @@
         function attachRemoveFromCartListeners() {
             document.querySelectorAll('.remove-from-cart-btn').forEach(button => {
                 button.addEventListener('click', (event) => {
-                    const productId = parseInt(event.target.closest('button').dataset.id);
+                    // Use closest to ensure the button is the target, even if the SVG or path is clicked
+                    const productId = parseInt(event.target.closest('button').dataset.id); 
                     cart = cart.filter(item => item.id !== productId);
                     updateCart();
                 });
@@ -541,38 +420,48 @@
         checkoutForm.addEventListener('submit', (event) => {
             event.preventDefault();
 
+            if (cart.length === 0) {
+                // Use a temporary visual message instead of alert()
+                const originalText = submitOrderBtn.textContent;
+                submitOrderBtn.textContent = "Cart is Empty! Add products first.";
+                submitOrderBtn.classList.add('bg-red-500');
+                setTimeout(() => {
+                    submitOrderBtn.textContent = originalText;
+                    submitOrderBtn.classList.remove('bg-red-500');
+                }, 2500);
+                return;
+            }
+
             const clientName = document.getElementById('client-name').value;
             const clientPhone = document.getElementById('client-phone').value;
             const clientEmail = document.getElementById('client-email').value;
-
-            const orderDetails = cart.map(item =>
-                `${item.name} - Quantity: ${item.quantity} - Total: ₱${(item.price * item.quantity)}`
-            ).join('\n');
-            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
             
-            const emailBody = `--- Client Information ---\n` +
-                `Name: ${clientName}\n` +
-                `Contact Number: ${clientPhone}\n` +
-                `Email: ${clientEmail}\n\n` +
-                `--- Order Details ---\n` +
-                `${orderDetails}\n\n` +
-                `Order Total: ₱${total}`;
+            const orderTotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
 
-            const subject = encodeURIComponent(`New Veptra Order from ${clientName}`);
-            const body = encodeURIComponent(emailBody);
-            // mailto destination confirmed as veptraph@gmail.com
-            const mailtoLink = `mailto:veptraph@gmail.com?subject=${subject}&body=${body}`;
+            let body = `Hello Veptra,\n\nI would like to place an order based on the details below.\n\n--- Client Details ---\nName: ${clientName}\nPhone: ${clientPhone}\nEmail: ${clientEmail}\n\n--- Order Summary ---\n`;
 
+            cart.forEach(item => {
+                body += `- ${item.name} (₱${item.price} each) x ${item.quantity} = ₱${item.price * item.quantity}\n`;
+            });
+
+            body += `\n--- Total Order Value ---\nTotal: ₱${orderTotal}\n\nThank you.\n`;
+
+            let subject = `New Order from ${clientName} (Total: ₱${orderTotal})`;
+            
+            // Generate the mailto link
+            const mailtoLink = `mailto:veptraph@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+            // Redirect to the mailto link
             window.location.href = mailtoLink;
         });
 
-        // Initialize on page load
-        document.addEventListener('DOMContentLoaded', () => {
+        // Initialize
+        window.onload = () => {
             renderProducts();
             updateCart();
-        });
+        };
+
     </script>
 </body>
 
 </html>
-
